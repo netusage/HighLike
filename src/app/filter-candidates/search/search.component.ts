@@ -16,7 +16,6 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-
   FindPersonsForCity() {
     this.cityEmiter.emit(this.city);
   }
