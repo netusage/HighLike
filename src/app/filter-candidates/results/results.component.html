@@ -1,11 +1,13 @@
-<table>
+<table class="table">
   <tr>
     <th>שם</th>
+    <th>שם משפחה</th>
     <th>כתובת</th>
   </tr>
 
   <tr *ngFor="let p of persons">    
     <td>  {{p.first_name}}  </td>
     <td>  {{p.last_name}}  </td>
+    <td>  {{p.city}}  </td>
   </tr>
 </table>
