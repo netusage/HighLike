@@ -4,6 +4,13 @@
         <input id="findCandidatesButton" type="radio" value="findCandidates" name="selectedFeature" [(ngModel)]="selectedFeature">איתור מועמדים
         <input id="generateProfileButton" type="radio" value="generateProfile" name="selectedFeature" [(ngModel)]="selectedFeature">הפקת פרופיל
     </form>
-    <h1 *ngIf="selectedFeature === 'findCandidates'">ברוכים הבאים לאיתור מועמדים</h1>
+    <div *ngIf="selectedFeature === 'findCandidates'">
+        <ul>
+            <h1>
+                <app-search></app-search>
+            </h1>
+        </ul>
+        <app-results></app-results>
+    </div>
     <h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
 </div>
