@@ -19,10 +19,10 @@ import { FilterCandidatesComponent } from './filter-candidates/filter-candidates
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
-    LoadDataService,
+    LoadDataService
   ],
   bootstrap: [AppComponent]
 })

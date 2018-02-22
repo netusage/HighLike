@@ -4,6 +4,9 @@ import { FormsModule } from "@angular/forms";
 import { By } from '@angular/platform-browser';
 import { ResultsComponent } from './filter-candidates/results/results.component';
 import { SearchComponent } from './filter-candidates/search/search.component';
+import { LoadDataService } from './services/load-data.service';
+import { HttpClientModule } from '@angular/common/http';
+import { LoadDataServiceMock } from './services/load-data-service-mock';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -13,7 +16,11 @@ describe('AppComponent', () => {
         SearchComponent
       ],
       imports: [
-        FormsModule
+        FormsModule,
+        HttpClientModule
+      ],
+      providers: [
+        { provide: LoadDataService, useClass: LoadDataServiceMock }
       ]
     }).compileComponents();
   }));

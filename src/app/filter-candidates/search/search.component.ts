@@ -7,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  city: string;
+  public city: string;
 
-  constructor(){
-  }
+  constructor() { }
 
   ngOnInit() {
   }
