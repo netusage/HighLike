@@ -9,10 +9,16 @@ import { LoadDataService } from '../services/load-data.service';
 })
 export class FilterCandidatesComponent implements OnInit {
 
+  city: string;
   constructor(public loadDataService: LoadDataService) { 
   }
 
   ngOnInit() {
+  }
+
+  onCityChange(changedCity: string): void
+  {
+    this.city = changedCity;
   }
 
 }

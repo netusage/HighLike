@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ResultsComponent } from './filter-candidates/results/results.component';
 import { SearchComponent } from './filter-candidates/search/search.component';
 import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResultsComponent,
     SearchComponent,
-    FilterCandidatesComponent
+    FilterCandidatesComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
