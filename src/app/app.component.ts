@@ -7,8 +7,8 @@ import { LoadDataService } from './services/load-data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public title = 'High Like';
-  public selectedFeature = 'findCandidates';
+  title = 'High Like';
+  selectedFeature = 'filterCandidates';
   
   constructor(private loadDataService: LoadDataService){
     console.log(this.loadDataService.getJSON());

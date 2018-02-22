@@ -1,0 +1,8 @@
+<div style="margin: 20px;">
+    <ul>
+        <h1>
+            <app-search></app-search>
+        </h1>
+    </ul>
+    <app-results [persons]="loadDataService.people$ | async"></app-results>
+</div>

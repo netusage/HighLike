@@ -4,11 +4,11 @@
             <a class="navbar-brand">
                 <!-- <img src="assets/img/ngx-bootstrap.svg" class="logo"> -->
             </a>
-            <span class="navbar-brand">High Like</span>
+            <span class="navbar-brand">{{title}}</span>
         </div>
         <ul class="nav navbar-nav">
-            <li id="findCandidatesNavbarItem" [class.active]="selectedFeature === 'findCandidates'">
-                <a href="#" (click)="selectedFeature = 'findCandidates'">איתור מועמדים</a>
+            <li id="filterCandidatesNavbarItem" [class.active]="selectedFeature === 'filterCandidates'">
+                <a href="#" (click)="selectedFeature = 'filterCandidates'">איתור מועמדים</a>
             </li>
             <li id="generateProfileNavbarItem" [class.active]="selectedFeature === 'generateProfile'">
                 <a href="#" (click)="selectedFeature = 'generateProfile'">הפקת פרופיל</a>
@@ -16,12 +16,7 @@
         </ul>
     </div>
 </nav>
-<div *ngIf="selectedFeature === 'findCandidates'">
-    <ul>
-        <h1>
-            <app-search></app-search>
-        </h1>
-    </ul>
-    <app-results></app-results>
+<div *ngIf="selectedFeature === 'filterCandidates'">
+    <app-filter-candidates></app-filter-candidates>
 </div>
 <h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
