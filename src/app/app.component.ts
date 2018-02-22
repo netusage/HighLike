@@ -7,10 +7,10 @@ import { LoadDataService } from './services/load-data.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'High Like';
+  selectedFeature = 'findCandidates';
   
   constructor(private loadDataService: LoadDataService){
     console.log(this.loadDataService.getJSON());
   }
-  
 }
