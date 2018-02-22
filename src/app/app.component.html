@@ -1,16 +1,27 @@
-<h1 id="title" style="text-align: center">{{title}}</h1>
-<div style="margin: 20px;">
-    <form>
-        <input id="findCandidatesButton" type="radio" value="findCandidates" name="selectedFeature" [(ngModel)]="selectedFeature">איתור מועמדים
-        <input id="generateProfileButton" type="radio" value="generateProfile" name="selectedFeature" [(ngModel)]="selectedFeature">הפקת פרופיל
-    </form>
-    <div *ngIf="selectedFeature === 'findCandidates'">
-        <ul>
-            <h1>
-                <app-search></app-search>
-            </h1>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                <!-- <img src="assets/img/ngx-bootstrap.svg" class="logo"> -->
+            </a>
+            <span class="navbar-brand">High Like</span>
+        </div>
+        <ul class="nav navbar-nav">
+            <li id="findCandidatesNavbarItem" [class.active]="selectedFeature === 'findCandidates'">
+                <a href="#" (click)="selectedFeature = 'findCandidates'">איתור מועמדים</a>
+            </li>
+            <li id="generateProfileNavbarItem" [class.active]="selectedFeature === 'generateProfile'">
+                <a href="#" (click)="selectedFeature = 'generateProfile'">הפקת פרופיל</a>
+            </li>
         </ul>
-        <app-results></app-results>
     </div>
-    <h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
+</nav>
+<div *ngIf="selectedFeature === 'findCandidates'">
+    <ul>
+        <h1>
+            <app-search></app-search>
+        </h1>
+    </ul>
+    <app-results></app-results>
 </div>
+<h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>

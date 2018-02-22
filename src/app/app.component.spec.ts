@@ -34,20 +34,14 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('High Like');
   }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const element = fixture.debugElement.query(By.css('#title'));
-    expect(element.nativeElement.textContent).toBe('High Like');
-  }));
   it('should select feature \'findCandidatesButton\' on init', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     fixture.whenStable().then(() => {
-      const element1 = fixture.debugElement.query(By.css('#findCandidatesButton'));
-      expect(element1.nativeElement.checked).toBe(true);
-      const element2 = fixture.debugElement.query(By.css('#generateProfileButton'));
-      expect(element2.nativeElement.checked).toBe(false);
+      const element1 = fixture.debugElement.query(By.css('#findCandidatesNavbarItem'));
+      expect(element1.nativeElement.classList).toContain('active');
+      const element2 = fixture.debugElement.query(By.css('#generateProfileNavbarItem'));
+      expect(element2.nativeElement.classList).not.toContain('active');
     });
   }));
 });
