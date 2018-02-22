@@ -4,5 +4,5 @@
             <app-search></app-search>
         </h1>
     </ul>
-    <app-results></app-results>
+    <app-results [persons]="loadDataService.people$ | async"></app-results>
 </div>

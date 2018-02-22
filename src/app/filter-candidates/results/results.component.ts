@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PersonModel } from '../../models/person-model';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
+
 export class ResultsComponent implements OnInit {
-  persons: Person[] = []; 
+  @Input()
+  persons: PersonModel[] = [];
+
   constructor() { 
-    var person: Person = { name: "משה משה", address: "המשעול 5 רמת גן"};
-    this.persons.push(person);
+    
+
+    //this.persons = this.persons;
   }
-  
 
   ngOnInit() {
+    
   }
-
-  
-}
-interface Person {
-  name: string;
-  address: string;
 }
