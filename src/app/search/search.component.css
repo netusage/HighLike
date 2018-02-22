@@ -1,0 +1,14 @@
+label {
+    font-size: 20px;
+    color:cornflowerblue;
+    text-align: center;
+}
+.button {
+    background-color:cornflowerblue; /* Green */
+
+    padding: 1px 10px;
+    text-align: center;
+ 
+    
+    font-size: 15px;
+}

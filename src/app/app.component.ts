@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'app';
   
   constructor(private loadDataService: LoadDataService){
-    loadDataService.getJSON();
+    console.log(this.loadDataService.getJSON());
   }
-
+  
 }
