@@ -2,8 +2,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { FormsModule } from "@angular/forms";
 import { By } from '@angular/platform-browser';
-import { ResultsComponent } from './results/results.component';
-import { SearchComponent } from './search/search.component';
+import { ResultsComponent } from './filter-candidates/results/results.component';
+import { SearchComponent } from './filter-candidates/search/search.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,7 +33,7 @@ describe('AppComponent', () => {
     const element = fixture.debugElement.query(By.css('#title'));
     expect(element.nativeElement.textContent).toBe('High Like');
   }));
-  it('should select feature \'findCandidatesButton\' on init', async(() => {
+  it('should select feature \'filterCandidatesButton\' on init', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     fixture.whenStable().then(() => {

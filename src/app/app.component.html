@@ -1,16 +1,11 @@
 <h1 id="title" style="text-align: center">{{title}}</h1>
 <div style="margin: 20px;">
-    <form>
-        <input id="findCandidatesButton" type="radio" value="findCandidates" name="selectedFeature" [(ngModel)]="selectedFeature">איתור מועמדים
-        <input id="generateProfileButton" type="radio" value="generateProfile" name="selectedFeature" [(ngModel)]="selectedFeature">הפקת פרופיל
-    </form>
-    <div *ngIf="selectedFeature === 'findCandidates'">
-        <ul>
-            <h1>
-                <app-search></app-search>
-            </h1>
-        </ul>
-        <app-results></app-results>
-    </div>
-    <h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
+  <form>
+    <input id="filterCandidatesButton" type="radio" value="filterCandidates" name="selectedFeature" [(ngModel)]="selectedFeature">איתור מועמדים
+    <input id="generateProfileButton" type="radio" value="generateProfile" name="selectedFeature" [(ngModel)]="selectedFeature">הפקת פרופיל
+  </form>
+  <div *ngIf="selectedFeature === 'filterCandidates'">
+    <app-filter-candidates></app-filter-candidates>
+</div>
+<h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
 </div>

@@ -5,14 +5,16 @@ import { AppComponent } from './app.component';
 import { LoadDataService } from './services/load-data.service';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ResultsComponent } from './results/results.component';
-import { SearchComponent } from './search/search.component';
+import { ResultsComponent } from './filter-candidates/results/results.component';
+import { SearchComponent } from './filter-candidates/search/search.component';
+import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResultsComponent,
-    SearchComponent
+    SearchComponent,
+    FilterCandidatesComponent
   ],
   imports: [
     BrowserModule,
