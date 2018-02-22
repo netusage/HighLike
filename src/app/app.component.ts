@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private title = 'High Like';
-  private selectedFeature = 'findCandidates';
+  public title = 'High Like';
+  public selectedFeature = 'findCandidates';
 }
