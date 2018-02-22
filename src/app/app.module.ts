@@ -5,12 +5,13 @@ import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ResultsComponent } from './results/results.component';
-
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ResultsComponent
+    ResultsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,FormsModule,
