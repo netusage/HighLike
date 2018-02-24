@@ -12,12 +12,8 @@ export class ResultsComponent implements OnInit {
   persons: PersonModel[] = [];
 
   constructor() { 
-    
-
-    //this.persons = this.persons;
   }
 
   ngOnInit() {
-    
   }
 }

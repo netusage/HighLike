@@ -1,23 +1,4 @@
-<table class="table">
-  <tr>
-    <th>שם</th>
-    <th>שם משפחה</th>
-    <th>עיר מגורים</th>
-    <th>השכלה</th>
-    <th>חברה</th>
-    <th>תפקיד</th>
-    <th>נסיון בשנים</th>
-
-  </tr>
-
-  <tr *ngFor="let p of persons">    
-    <td>  {{p.first_name}}  </td>
-    <td>  {{p.last_name}}  </td>
-    <td>  {{p.city}}  </td>
-    <td>  {{p.education}}  </td>
-    <td>  {{p.company}}  </td>
-    <td>  {{p.position}}  </td>
-    <td>  {{p.experience_years}}  </td>
-
-  </tr>
-</table>
+<hr>
+  <div class="col-3" *ngFor="let person of persons">
+        <app-person-card [person]="person"></app-person-card>
+  </div>
