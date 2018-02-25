@@ -3,18 +3,34 @@
 
   <div class="container" dir="rtl">
     <form class="form-horizontal" #search="ngForm" (ngSubmit)="FindPersons(search)" style="direction:rtl">
-      
         <div class="row">
-            <label for="city">הזן עיר מגורים:</label>
+            <label for="city">עיר מגורים:</label>
             <div>
               <input type="text" class="form-control form-control-sm" [(ngModel)]="personQuery.city" name="city" id="city" style="direction:rtl">
             </div>
         </div>
-        
         <div class="row">
-            <label for="education">הזן השכלה:</label>
+            <label for="education">השכלה:</label>
             <div>
               <input type="text" class="form-control form-control-sm" [(ngModel)]="personQuery.education" name="education" id="education">
+            </div>
+        </div>
+        <div class="row">
+            <label for="company">חברה:</label>
+            <div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="personQuery.company" name="company" id="company">
+            </div>
+        </div>
+        <div class="row">
+            <label for="experience_years_from">שנות ניסיון מ:</label>
+            <div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="personQuery.experience_years_from" name="experience_years_from" id="experience_years_from">
+            </div>
+        </div>
+        <div class="row">
+            <label for="experience_years_to">שנות ניסיון עד:</label>
+            <div>
+              <input type="text" class="form-control form-control-sm" [(ngModel)]="personQuery.experience_years_to" name="experience_years_to" id="experience_years_to">
             </div>
         </div>
 
@@ -34,7 +50,7 @@
 
       <!-- Buttons Block -->
             <div class="form-group">
-                <button type="reset" class="btn btn-default">בטל</button>
+                <!-- <button type="reset" class="btn btn-default">בטל</button> -->
                 <button type="submit" class="btn btn-primary">חפש</button>
             </div>
       <!-- <button (click)="FindPersonsForCity()" class="button">חפש</button> -->

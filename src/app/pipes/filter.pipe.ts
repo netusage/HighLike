@@ -13,7 +13,6 @@ export class FilterPipe implements PipeTransform {
     // searchCriteria.city = searchCriteria.city.toLowerCase();
     // searchCriteria.company = searchCriteria.company.toLowerCase();
     // searchCriteria.education = searchCriteria.education.toLowerCase();
-    debugger;
     return items.filter(it => {
       return (!searchCriteria.city || it.city.toLowerCase().includes(searchCriteria.city)) &&
              (!searchCriteria.company || it.company.toLowerCase().includes(searchCriteria.company)) &&
