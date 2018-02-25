@@ -23,4 +23,12 @@ export class LoadDataService {
           this.peopleSubj$.next(data);
         });
     }
+
+    public postJSON(candidateParams: PersonModel) {
+      this.http.post("http://localhost:3000/api/person/getMatches", {
+        candidateParams
+      }).subscribe((data: Array<PersonModel>) => {
+        this.peopleSubj$.next(data);
+      });
+  }
   }

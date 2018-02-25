@@ -19,6 +19,20 @@ app.use(mwSample);
     return await dalFunction();
 })); */
 
+const bodyParser = require("body-parser"); // Body parser for fetch posted data
+
+app.use(bodyParser.urlencoded({ extended: false })); 
+app.use(bodyParser.json()); // Body parser use JSON data
+
+app.post('/api/person/getMatches',function(req,res){
+    const candidate = req.body.candidateParams;
+    const data = {
+        "Data":"test" + candidate  
+    };
+
+    res.json(data);
+});
+
 function runApi(fn){
     return function(req, res) {
         try {

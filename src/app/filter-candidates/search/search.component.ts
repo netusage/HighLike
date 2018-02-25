@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { LoadDataService } from '../../services/load-data.service';
+import { PersonModel } from '../../models/person-model';
 
 @Component({
   selector: 'app-search',
@@ -11,13 +13,20 @@ export class SearchComponent implements OnInit {
   
   public city: string;
 
-  constructor() { }
+  constructor(private loadDataService: LoadDataService) { }
 
   ngOnInit() {
   }
 
   FindPersonsForCity() {
+    debugger;
     this.cityEmiter.emit(this.city);
+
+    let  personObject: PersonModel ; 
+    //{      city: "",      first_name: "",    };
+    personObject.city = this.city;
+    
+    this.loadDataService.postJSON(personObject);
   }
 
   
