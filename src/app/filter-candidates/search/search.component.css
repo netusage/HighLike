@@ -1,14 +1,15 @@
 label {
-    font-size: 20px;
-    color:cornflowerblue;
-    text-align: center;
+    
+    color:black;
+    /*font-size: 20px;
+    text-align: center;*/
 }
-.button {
-    background-color:cornflowerblue; /* Green */
+/*.button {
+    background-color:cornflowerblue; 
 
     padding: 1px 10px;
     text-align: center;
  
     
     font-size: 15px;
-}
+}*/
