@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node cli.js start",
+    "start": "node build/cli dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
