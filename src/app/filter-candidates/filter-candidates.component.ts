@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonModel } from '../models/person-model';
 import { LoadDataService } from '../services/load-data.service';
+import { PersonQuery } from '../models/person-query-model';
 
 @Component({
   selector: 'app-filter-candidates',
@@ -9,16 +10,17 @@ import { LoadDataService } from '../services/load-data.service';
 })
 export class FilterCandidatesComponent implements OnInit {
 
-  city: string;
+  personQuery: PersonQuery;
   constructor(public loadDataService: LoadDataService) { 
   }
 
   ngOnInit() {
   }
 
-  onCityChange(changedCity: string): void
+  onQueryChange(changedQuery: PersonQuery): void
   {
-    this.city = changedCity;
+    this.personQuery = changedQuery;
+    this.loadDataService.postJSON(this.personQuery);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LoadDataService } from '../../services/load-data.service';
 import { PersonModel } from '../../models/person-model';
+import { PersonQuery } from '../../models/person-query-model';
 
 @Component({
   selector: 'app-search',
@@ -9,25 +9,26 @@ import { PersonModel } from '../../models/person-model';
 })
 export class SearchComponent implements OnInit {
 
-  @Output()  cityEmiter: EventEmitter<string> = new EventEmitter<string>();
+  @Output()  personQueryEmiter: EventEmitter<PersonQuery> = new EventEmitter<PersonQuery>();
   
   public city: string;
+  private personQuery: PersonQuery;
 
-  constructor(private loadDataService: LoadDataService) { }
+  constructor() { }
 
   ngOnInit() {
+      this.personQuery = new PersonQuery(
+         {
+          city: "", experience_years_from: 0, experience_years_to: 0, education: "", company: ""
+         }
+    );
   }
 
-  FindPersonsForCity() {
-    debugger;
-    this.cityEmiter.emit(this.city);
+  FindPersons({ value, valid}: { value: PersonQuery, valid: boolean }) {
+    this.personQuery = value;
+    console.log(this.personQuery);
+    console.log("valid: " + valid);
 
-    let  personObject: PersonModel ; 
-    //{      city: "",      first_name: "",    };
-    personObject.city = this.city;
-    
-    this.loadDataService.postJSON(personObject);
+    this.personQueryEmiter.emit(this.personQuery);
   }
-
-  
 }
