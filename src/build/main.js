@@ -32,7 +32,12 @@ async function dev(){
 async function runMongo(){
   const mongoPath = process.env.MONGO_PATH;
   if (!mongoPath) {
-    throw new Error("MONGO_PATH is empty")
+    throw new Error("***************************** MONGO_PATH IS EMPTY *****************************")
+  }
+
+  const dir = path.join(__dirname, '../../db/data');
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
   }
 
   const mongoExe = path.resolve(mongoPath, "bin/mongod");
@@ -42,7 +47,6 @@ async function runMongo(){
 }
 
 async function fillMongo() {
-  console.log('INSIDE fillMongo');
   const initialJsonFilePath = path.resolve(__dirname, "../../db/initial.json");
   const initialContacts = JSON.parse(await readFile(initialJsonFilePath, "utf8"));
 
