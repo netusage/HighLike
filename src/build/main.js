@@ -5,7 +5,7 @@ async function dev(){
     validateExitCode: true,
   });
 
-  spawn("nodemon", ["dist/out-tsc/main.js"]);
+  spawn("nodemon", ["dist-srv/main.js"]);
 
   spawn("ng", ["serve", "--open", "--proxy-config", "proxy.conf.json"]);
 

@@ -6,7 +6,7 @@
         "lib": [
             "es2017"
         ],
-        "outDir": "../../dist/out-tsc"
+        "outDir": "../../dist-srv"
     },
     "exclude": [
         "node_modules"
