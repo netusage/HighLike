@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
 
+  public fullScreen = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  screenClick() {
+    this.fullScreen = true;
   }
 
 }
