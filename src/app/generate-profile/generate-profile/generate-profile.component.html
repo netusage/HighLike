@@ -1,0 +1,8 @@
+<div style="margin: 20px;">
+  <ul>
+    <h1>
+      <app-gp-search (profileQueryChanged)="onQueryChange($event)"></app-gp-search>
+    </h1>
+  </ul>
+  <app-gp-results [profiles]="loadDataService.profile$ | async "></app-gp-results>
+</div>

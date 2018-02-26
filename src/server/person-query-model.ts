@@ -1,18 +1,9 @@
-export class PersonQuery {
- 
-    city: string;
-    experience_years_from: number;
-    experience_years_to: number;
-    education: string;
-    company: string;
+export class ProfileQuery {
+  city: number = 10;
+  education: number = 10;
+  company: number = 10;
 
-    // constructor(city: string = "") {
-    //   //Constructor initialization
-    //   this.city = city;
-
-       constructor(values: Object = {}) {
-         //Constructor initialization
-         Object.assign(this, values);
+  constructor(values: Object = {}) {
+      Object.assign(this, values);
   }
- 
 }

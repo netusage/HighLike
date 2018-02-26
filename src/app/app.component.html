@@ -23,5 +23,7 @@
 <div *ngIf="selectedFeature === 'filterCandidates'">
     <app-filter-candidates></app-filter-candidates>
 </div>
-<h1 style="text-align: center;" *ngIf="selectedFeature === 'generateProfile'">עמוד זה בפיתוח...</h1>
+<div *ngIf="selectedFeature === 'generateProfile'">
+    <app-generate-profile></app-generate-profile>
+</div>
 <app-review *ngIf="selectedFeature === 'presentation'"></app-review>
