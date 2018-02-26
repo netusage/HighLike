@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
       this.personQuery = new PersonQuery(
          {
-          city: "", experience_years_from: 0, experience_years_to: 0, education: "", company: ""
+          city: "", experience_years_from: 0, experience_years_to: 100, education: "", company: ""
          }
     );
   }
