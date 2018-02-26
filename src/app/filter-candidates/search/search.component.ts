@@ -26,8 +26,8 @@ export class SearchComponent implements OnInit {
 
   FindPersons({ value, valid}: { value: PersonQuery, valid: boolean }) {
     this.personQuery = value;
-    console.log(this.personQuery);
-    console.log("valid: " + valid);
+    //console.log(this.personQuery);
+    //console.log("valid: " + valid);
 
     this.personQueryEmiter.emit(this.personQuery);
   }
