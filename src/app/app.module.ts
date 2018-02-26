@@ -9,6 +9,7 @@ import { ResultsComponent } from './filter-candidates/results/results.component'
 import { SearchComponent } from './filter-candidates/search/search.component';
 import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { PersonCardComponent } from './person-card/person-card.component';
 import { ReviewComponent } from './review/review.component';
 
 @NgModule({
@@ -18,12 +19,13 @@ import { ReviewComponent } from './review/review.component';
     SearchComponent,
     FilterCandidatesComponent,
     FilterPipe,
-    ReviewComponent
+    PersonCardComponent,
+    ReviewComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     LoadDataService

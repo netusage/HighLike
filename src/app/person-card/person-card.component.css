@@ -1,0 +1,5 @@
+.floating-card {
+    display: inline-block;
+    margin: 50px;
+    border: 1px solid rgb(0, 0, 0);  
+}
