@@ -36,7 +36,7 @@ app.post('/api/person/getMatches', function (req, res) {
 
     //const fs = require('fs');
     //const persons: Array<PersonModel> = JSON.parse(fs.readFileSync('peopleMock.json', 'utf8'));
-    GetPersons().then(data => HandleData(data, searchCriteria, res));
+    GetPersons(searchCriteria).then(data => HandleData(data, searchCriteria, res));
     //console.log(personsJson);
     //const persons: Array<PersonModel> = JSON.parse(personsJson);
     //console.log(persons);
@@ -79,15 +79,15 @@ function HandleData(data: any, searchCriteria: PersonQuery, res: any) {
     //console.log(data);
     //const persons: Array<PersonModel> = JSON.parse(data);
     const persons: Array<PersonModel> = data;
-    const candidatePersons = persons.filter(it => {
-        return (!searchCriteria.city || it.city.toLowerCase().includes(searchCriteria.city)) &&
-            (!searchCriteria.company || it.company.toLowerCase().includes(searchCriteria.company)) &&
-            (!searchCriteria.education || it.education.toLowerCase().includes(searchCriteria.education)) &&
-            (!searchCriteria.experience_years_from || Number(it.experience_years) >= searchCriteria.experience_years_from) &&
-            (!searchCriteria.experience_years_to || Number(it.experience_years) <= searchCriteria.experience_years_to);
-    });
-    //console.log(candidatePersons);
-    res.json(candidatePersons);
+    // const candidatePersons = persons.filter(it => {
+    //     return (!searchCriteria.city || it.city.toLowerCase().includes(searchCriteria.city)) &&
+    //         (!searchCriteria.company || it.company.toLowerCase().includes(searchCriteria.company)) &&
+    //         (!searchCriteria.education || it.education.toLowerCase().includes(searchCriteria.education)) &&
+    //         (!searchCriteria.experience_years_from || Number(it.experience_years) >= searchCriteria.experience_years_from) &&
+    //         (!searchCriteria.experience_years_to || Number(it.experience_years) <= searchCriteria.experience_years_to);
+    // });
+    console.log(persons);
+    res.json(persons);
 }
 
 const mongodb = require("mongodb");
@@ -95,17 +95,24 @@ const connect: any = promisify(mongodb.MongoClient.connect);
 
 mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArray);
 
-async function GetPersons() {
+async function GetPersons(searchCriteria) {
+
 
     console.log("Connecting");
-    const client = await connect("mongodb://prog14:27017");
+    const client = await connect("mongodb://localhost:27017");
     console.log("Connected");
 
     const db = client.db("Highlike");
 
     const contacts = db.collection("people");
 
-    const docs = await contacts.find({}).toArrayAsync();
+    
+    const objQuery = buildQuery(searchCriteria);
+    // const docs = await contacts.find({$or:[{city:"תל אביב"}, {education:"תוכנה"}]}).toArrayAsync();
+    let docs = [];
+    if (objQuery){
+        docs = await contacts.find(objQuery).toArrayAsync();
+    }
 
     // for (const doc of docs) {
     //     console.log(doc);
@@ -113,9 +120,41 @@ async function GetPersons() {
 
     console.log("Closing");
     client.close();
+
+    
     return docs;
 }
 
+function buildQuery(searchCriteria){
+
+    
+    const searchCriteriaArray: Array<any> = [];
+    Object.setPrototypeOf(searchCriteria, null);
+    
+    if (searchCriteria.city) {
+        searchCriteriaArray.push({city: searchCriteria.city})
+    }
+
+    if (searchCriteria.education) {
+        searchCriteriaArray.push({education: searchCriteria.education})
+    }
+
+    if (searchCriteria.company) {
+        searchCriteriaArray.push({company: searchCriteria.company})
+    }
+
+    // if (searchCriteria.experience_years_from && Number(searchCriteria.experience_years_from) > 0 ) {
+    //     searchCriteriaArray.push({experience_years: {$gte :Number(searchCriteria.experience_years_from)}})
+    // }
+    // if (searchCriteria.experience_years_to && Number(searchCriteria.experience_years_to) > 0 && Number(searchCriteria.experience_years_to) < 100) {
+    //     searchCriteriaArray.push({experience_years: {$lte:Number(searchCriteria.experience_years_to)}})
+    // }
+    if (searchCriteriaArray) {
+        return {$or: searchCriteriaArray };
+    }
+
+    return {};
+}
 
 function promisify(fn) {
     return function () {
