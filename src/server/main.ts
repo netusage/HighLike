@@ -99,7 +99,7 @@ mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArr
 async function GetPersons() {
 
     console.log("Connecting");
-    const client = await connect("mongodb://prog14:27017");
+    const client = await connect("mongodb://localhost:27017");
     console.log("Connected");
 
     const db = client.db("Highlike");
