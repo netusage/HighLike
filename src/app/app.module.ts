@@ -9,6 +9,7 @@ import { ResultsComponent } from './filter-candidates/results/results.component'
 import { SearchComponent } from './filter-candidates/search/search.component';
 import { FilterCandidatesComponent } from './filter-candidates/filter-candidates.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ReviewComponent } from './review/review.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     ResultsComponent,
     SearchComponent,
     FilterCandidatesComponent,
-    FilterPipe
+    FilterPipe,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,

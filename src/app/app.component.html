@@ -14,10 +14,14 @@
             <li id="generateProfileNavbarItem" [class.active]="selectedFeature === 'generateProfile'">
                 <a href="#" (click)="selectedFeature = 'generateProfile'">הפקת פרופיל</a>
             </li>
+            <li id="presentationNavbarItem" [class.active]="selectedFeature === 'presentation'">
+                <a style="color: blue;" href="#" (click)="selectedFeature = 'presentation'">סקירת קורס</a>
+            </li>
         </ul>
     </div>
 </nav>
 <div *ngIf="selectedFeature === 'filterCandidates'">
     <app-filter-candidates></app-filter-candidates>
 </div>
-<h1 *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
+<h1 style="text-align: center;" *ngIf="selectedFeature === 'generateProfile'">ברוכים הבאים להפקת פרופיל</h1>
+<app-review *ngIf="selectedFeature === 'presentation'"></app-review>
