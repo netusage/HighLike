@@ -10,9 +10,9 @@ export class FilterPipe implements PipeTransform {
     if (!items) return [];
     if (!searchCriteria) return items;
     
-    // searchCriteria.city = searchCriteria.city.toLowerCase();
-    // searchCriteria.company = searchCriteria.company.toLowerCase();
-    // searchCriteria.education = searchCriteria.education.toLowerCase();
+    searchCriteria.city = searchCriteria.city.toLowerCase();
+    searchCriteria.company = searchCriteria.company.toLowerCase();
+    searchCriteria.education = searchCriteria.education.toLowerCase();
     return items.filter(it => {
       return (!searchCriteria.city || it.city.toLowerCase().includes(searchCriteria.city)) &&
              (!searchCriteria.company || it.company.toLowerCase().includes(searchCriteria.company)) &&
