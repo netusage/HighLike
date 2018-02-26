@@ -11,6 +11,6 @@ export class AppComponent {
   selectedFeature = 'filterCandidates';
   
   constructor(private loadDataService: LoadDataService){
-    console.log(this.loadDataService.getJSON());
+    //console.log(this.loadDataService.getJSON());
   }
 }
