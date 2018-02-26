@@ -2,6 +2,8 @@ import * as express from "express";
 import { PersonModel } from "./person-model";
 import { PersonQuery } from "./person-query-model";
 
+const mongodb = require("mongodb");
+
 function mwSample(req, res, next) {
     console.log('Running sample middleware...');
     /* if (false) {
@@ -90,7 +92,6 @@ function HandleData(data: any, searchCriteria: PersonQuery, res: any) {
     res.json(persons);
 }
 
-const mongodb = require("mongodb");
 const connect: any = promisify(mongodb.MongoClient.connect);
 
 mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArray);

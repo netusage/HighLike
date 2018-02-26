@@ -11,4 +11,6 @@ export class PersonModel {
 
     modified: string;
     vip: boolean;
+
+    matchRatio: number; // 0..100
 }
