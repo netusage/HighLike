@@ -88,7 +88,7 @@ function HandleData(data: any, searchCriteria: PersonQuery, res: any) {
     //         (!searchCriteria.experience_years_from || Number(it.experience_years) >= searchCriteria.experience_years_from) &&
     //         (!searchCriteria.experience_years_to || Number(it.experience_years) <= searchCriteria.experience_years_to);
     // });
-    console.log(persons);
+    // console.log(persons);
     res.json(persons);
 }
 
@@ -110,10 +110,11 @@ async function GetPersons(searchCriteria) {
     
     const objQuery = buildQuery(searchCriteria);
     // const docs = await contacts.find({$or:[{city:"תל אביב"}, {education:"תוכנה"}]}).toArrayAsync();
-    let docs = [];
+    let docs: Array<PersonModel> = [];
     if (objQuery){
-        docs = await contacts.find(objQuery).toArrayAsync();
+        docs = await contacts.find(objQuery).toArrayAsync();        
     }
+
 
     // for (const doc of docs) {
     //     console.log(doc);
@@ -122,8 +123,42 @@ async function GetPersons(searchCriteria) {
     console.log("Closing");
     client.close();
 
-    
+    CalcRatio(docs, searchCriteria);
     return docs;
+}
+
+function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
+    for (let el of docs) {
+        let matchesCounter = 0;
+        let fieldCounter = 0;
+        if (searchCriteria.city) {
+            if (el.city == searchCriteria.city ) {
+                matchesCounter++;
+            }
+            fieldCounter++;
+        }
+    
+        if (searchCriteria.education) {
+            if  (el.education == searchCriteria.education) {
+                matchesCounter++;
+            }
+            fieldCounter++;
+        }
+    
+        if (searchCriteria.company) {
+            if(el.company == searchCriteria.company) {
+                matchesCounter++;
+            }
+            fieldCounter++;
+        }
+        if (fieldCounter > 0) {
+            el.matchRatio = matchesCounter * 100 / fieldCounter;
+        }
+        else {
+            el.matchRatio = 0;
+        }
+
+    }
 }
 
 function buildQuery(searchCriteria){
@@ -151,6 +186,7 @@ function buildQuery(searchCriteria){
     //     searchCriteriaArray.push({experience_years: {$lte:Number(searchCriteria.experience_years_to)}})
     // }
     if (searchCriteriaArray) {
+
         return {$or: searchCriteriaArray };
     }
 
