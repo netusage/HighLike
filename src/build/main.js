@@ -1,15 +1,15 @@
 const child_process = require("child_process");
 
 async function dev(){
-  await spawn("node_modules\\.bin\\tsc", ["-p", "tsconfig.json"], {
+  await spawn("src\\server\\node_modules\\.bin\\tsc", ["-p", "src\\server\\tsconfig.json"], {
     validateExitCode: true,
   });
 
   spawn("nodemon", ["dist/out-tsc/main.js"]);
 
-  //spawn("ng", ["serve", "--open", "--proxy-config", "proxy.conf.json"]);
+  spawn("ng", ["serve", "--open", "--proxy-config", "proxy.conf.json"]);
 
-  spawn("node_modules\\.bin\\tsc", ["-p", "tsconfig.json", "-w"]);
+  spawn("src\\server\\node_modules\\.bin\\tsc", ["-p", "src\\server\\tsconfig.json", "-w"]);
 }
 
 function spawn(app, args, options) {
