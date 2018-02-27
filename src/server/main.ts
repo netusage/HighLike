@@ -145,6 +145,7 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         let matchesCounter = 0;
         let fieldCounter = 0;
         if (searchCriteria.city) {
+<<<<<<< HEAD
             if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
                 if (el.city.toLowerCase() == searchCriteria.city.toLocaleLowerCase()) {
                     matchesCounter += 2;
@@ -153,10 +154,15 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
                     matchesCounter++;
                 }
                 fieldCounter += 2;
+=======
+            if (el.city.toLowerCase() == searchCriteria.city.toLowerCase() ) {
+                matchesCounter++;
+>>>>>>> e93942e7fd30fbe478df2b8a069b63efec642020
             }
         }
 
         if (searchCriteria.education) {
+<<<<<<< HEAD
             if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
                 if (el.education.toLowerCase() == searchCriteria.education.toLowerCase()) {
                     matchesCounter += 2;
@@ -165,6 +171,10 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
                     matchesCounter++;
                 }
                 fieldCounter += 2;
+=======
+            if  (el.education.toLowerCase() == searchCriteria.education.toLowerCase()) {
+                matchesCounter++;
+>>>>>>> e93942e7fd30fbe478df2b8a069b63efec642020
             }
             // console.log(el.education.toLowerCase(), matchesCounter, fieldCounter, 
             //     el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()),
@@ -173,6 +183,7 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
 
 
         if (searchCriteria.company) {
+<<<<<<< HEAD
             if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
                 if (el.company.toLowerCase() == searchCriteria.company.toLowerCase()) {
                     matchesCounter += 2;
@@ -187,6 +198,10 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
             }
             else {
                 el.matchRatio = 0;
+=======
+            if(el.company.toLowerCase() == searchCriteria.company.toLowerCase()) {
+                matchesCounter++;
+>>>>>>> e93942e7fd30fbe478df2b8a069b63efec642020
             }
         }
 
