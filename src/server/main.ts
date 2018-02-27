@@ -1,6 +1,8 @@
 import * as express from "express";
 import { PersonModel } from "./person-model";
 import { PersonQuery } from "./person-query-model";
+import { ProfileQuery } from "./profile-query-model";
+import { ProfileModel } from "./profile-model";
 
 const mongodb = require("mongodb");
 
@@ -51,6 +53,11 @@ app.post('/api/person/getMatches', function (req, res) {
     //   });
     // //console.log(candidatePersons);
     // res.json(candidatePersons);
+});
+
+app.post('/api/profile/generate', function (req, res) {
+    const searchCriteria: ProfileQuery = req.body.profileQuery;
+    generateProfile().then(data => handleProfile(data, searchCriteria, res));
 });
 
 function runApi(fn) {
@@ -159,6 +166,74 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         }
 
     }
+}
+async function generateProfile() {
+
+    console.log("Connecting");
+    const client = await connect("mongodb://localhost:27017");
+    console.log("Connected");
+
+    const db = client.db("Highlike");
+
+    const contacts = db.collection("people");
+
+    const docs = await contacts.find({}).toArrayAsync();
+
+    // for (const doc of docs) {
+    //     console.log(doc);
+    // }
+
+    console.log("Closing");
+    client.close();
+    return docs;
+}
+
+function handleProfile(persons: Array<PersonModel>, searchCriteria: ProfileQuery, res: any) {
+    const profile = new ProfileModel();
+    const personCount = persons.length;
+    console.log(personCount);
+
+    const mostFrequentCity = findMostFrequent(persons.map(person => person.city));
+    if (mostFrequentCity.value && mostFrequentCity.count * 100 / personCount >= searchCriteria.city) {
+        profile.city = mostFrequentCity.value;
+    }
+    console.log(mostFrequentCity);
+
+    const mostFrequentEducation = findMostFrequent(persons.map(person => person.education));
+    if (mostFrequentEducation.value && mostFrequentEducation.count * 100 / personCount >= searchCriteria.education) {
+        profile.education = mostFrequentEducation.value;
+    }
+    console.log(mostFrequentEducation);
+
+    const mostFrequentCompany = findMostFrequent(persons.map(person => person.company));
+    if (mostFrequentCompany.value && mostFrequentCompany.count * 100 / personCount >= searchCriteria.company) {
+        profile.company = mostFrequentCompany.value;
+    }
+    console.log(mostFrequentCompany);
+
+    console.log(profile);
+    res.json([profile]);
+}
+
+function findMostFrequent(values: Array<string>) {
+    if(values.length == 0)
+        return null;
+    var modeMap = {};
+    var maxEl = values[0], maxCount = 1;
+    for(var i = 0; i < values.length; i++)
+    {
+        var el = values[i];
+        if(modeMap[el] == null)
+            modeMap[el] = 1;
+        else
+            modeMap[el]++;  
+        if(modeMap[el] > maxCount)
+        {
+            maxEl = el;
+            maxCount = modeMap[el];
+        }
+    }
+    return { value: maxEl, count: maxCount };
 }
 
 function buildQuery(searchCriteria){

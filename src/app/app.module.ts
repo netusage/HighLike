@@ -11,6 +11,9 @@ import { FilterCandidatesComponent } from './filter-candidates/filter-candidates
 import { FilterPipe } from './pipes/filter.pipe';
 import { PersonCardComponent } from './person-card/person-card.component';
 import { ReviewComponent } from './review/review.component';
+import { GpSearchComponent } from './generate-profile/gp-search/gp-search.component';
+import { GpResultsComponent } from './generate-profile/gp-results/gp-results.component';
+import { GenerateProfileComponent } from './generate-profile/generate-profile/generate-profile.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ReviewComponent } from './review/review.component';
     FilterPipe,
     PersonCardComponent,
     ReviewComponent,
+    GpSearchComponent,
+    GpResultsComponent,
+    GenerateProfileComponent,
   ],
   imports: [
     BrowserModule,
