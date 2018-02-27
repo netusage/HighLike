@@ -1,19 +1,51 @@
 <table class="table">
   <tbody>
     <tr>
-      <td><div [class.expand-thumbnail]="fullScreen" class="thumbnail review-thumbnail"><h3>E2E</h3><button (click)='fullScreen = !fullScreen'>{{fullScreen ? 'הגדל' : 'צמצם'}}</button></div></td>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-    </tr>
-    <tr>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-    </tr>
-    <tr>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-      <td><div class="thumbnail review-thumbnail"></div></td>
-      <td><div class="thumbnail review-thumbnail"></div></td>
+      <td *ngIf="displays[0]">
+        <div [class.expand-thumbnail]="expands[0]" class="thumbnail review-thumbnail">
+          <a (click)='buttonClick(0)'>{{!expands[0] ? 'הרחב' : 'צמצם'}}</a>
+          <h1>בדיקות E2E</h1>
+          <div *ngIf="expands[0]">
+            <h2>בדיקות לכל תרחיש ע"ח פיתוח</h2>
+            <h2>איתור בעיות מראש</h2>
+            <h2>אוטומציה</h2>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="displays[1]">
+        <div [class.expand-thumbnail]="expands[1]" class="thumbnail review-thumbnail">
+          <a (click)='buttonClick(1)'>{{!expands[1] ? 'הרחב' : 'צמצם'}}</a>
+          <h1>pair programming</h1>
+          <div *ngIf="expands[1]">
+            <h2>למשל ב-UX ובDEVOPS</h2>
+            <h2>סקר קוד</h2>
+            <h2>יישום בעבודה</h2>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="displays[2]">
+        <div [class.expand-thumbnail]="expands[2]" class="thumbnail review-thumbnail">
+          <a (click)='buttonClick(2)'>{{!expands[2] ? 'הרחב' : 'צמצם'}}</a>
+          <h1>איזון בין UX ל-working software</h1>
+          <div *ngIf="expands[2]">
+            <h2>דגש על סימטריות ופחות על אפקטים</h2>
+            <h2>bootstrap & cards ב-branch-ים נפרדים</h2>
+          </div>
+        </div>
+      </td>
+      <td *ngIf="displays[3]">
+        <div [class.expand-thumbnail]="expands[3]" class="thumbnail review-thumbnail">
+          <a (click)='buttonClick(3)'>{{!expands[3] ? 'הרחב' : 'צמצם'}}</a>
+          <h1>המירוץ לפיצ'ר</h1>
+          <div *ngIf="expands[3]">
+            <h2>יותר E2E</h2>
+            <h2>UX סביר בלבד</h2>
+            <h2>מצב תמידי של עודף משימות</h2>
+            <h2>תועלת מרכזית 1 - משימות לטווח קצר</h2>
+            <h2>תועלת מרכזית 2 - added-value ללקוח</h2>
+          </div>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>

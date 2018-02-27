@@ -6,8 +6,24 @@
     display: inline-block;
     margin-right: 100px;
     border: 1px solid;
+    border-width: 2px;
 }
 
 .expand-thumbnail {
-    width: 300px;
+    width: 800px;
+    height: 800px;
+}
+
+a {
+    cursor: pointer;
+}
+
+h1 {
+    font-style: italic;
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
