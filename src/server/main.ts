@@ -193,26 +193,31 @@ function handleProfile(persons: Array<PersonModel>, searchCriteria: ProfileQuery
     const personCount = persons.length;
     console.log(personCount);
 
+    let emptyProfile = true;
+
     const mostFrequentCity = findMostFrequent(persons.map(person => person.city));
     if (mostFrequentCity.value && mostFrequentCity.count * 100 / personCount >= searchCriteria.city) {
         profile.city = mostFrequentCity.value;
+        emptyProfile = false;
     }
     console.log(mostFrequentCity);
 
     const mostFrequentEducation = findMostFrequent(persons.map(person => person.education));
     if (mostFrequentEducation.value && mostFrequentEducation.count * 100 / personCount >= searchCriteria.education) {
         profile.education = mostFrequentEducation.value;
+        emptyProfile = false;
     }
     console.log(mostFrequentEducation);
 
     const mostFrequentCompany = findMostFrequent(persons.map(person => person.company));
     if (mostFrequentCompany.value && mostFrequentCompany.count * 100 / personCount >= searchCriteria.company) {
         profile.company = mostFrequentCompany.value;
+        emptyProfile = false;
     }
     console.log(mostFrequentCompany);
 
     console.log(profile);
-    res.json([profile]);
+    res.json(emptyProfile ? [] : [profile]);
 }
 
 function findMostFrequent(values: Array<string>) {
