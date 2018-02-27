@@ -49,7 +49,7 @@ async function runMongo(){
 }
 
 async function fillMongoWithCandidates() {
-  const initialJsonFilePath = path.resolve(__dirname, "../../db/initial.json");
+  const initialJsonFilePath = path.resolve(__dirname, "../../db/initialCandidates.json");
   const initialContacts = JSON.parse(await readFile(initialJsonFilePath, "utf8"));
 
   console.log("Connecting to mongo");
@@ -58,14 +58,14 @@ async function fillMongoWithCandidates() {
   const db = client.db("Highlike");
   const coll = db.collection("people");
 
-  console.log("Checking data is present inside db");
+  console.log("Checking if candidates data present inside db");
   const contacts = await coll.find({}).toArrayAsync();
   if (contacts.length == 0) {
-    console.log("Filling initial data from " + initialJsonFilePath);
+    console.log("Filling candidates initial data from " + initialJsonFilePath);
     await coll.insertManyAsync(initialContacts);
   }
   else {
-    console.log("Data is already present inside database")
+    console.log("Candidates data already present inside db");
   }
 
   client.close();
@@ -81,14 +81,14 @@ async function fillMongoWithEmployees() {
   const db = client.db("Highlike");
   const coll = db.collection("employees");
 
-  console.log("Checking data is present inside db");
+  console.log("Checking if employees data present inside db");
   const contacts = await coll.find({}).toArrayAsync();
   if (contacts.length == 0) {
-    console.log("Filling initial data from " + initialJsonFilePath);
+    console.log("Filling employees initial data from " + initialJsonFilePath);
     await coll.insertManyAsync(initialContacts);
   }
   else {
-    console.log("Data is already present inside database")
+    console.log("Employees data already present inside db");
   }
 
   client.close();
