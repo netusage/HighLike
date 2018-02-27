@@ -1,0 +1,20 @@
+<hr>
+<button (click)="profiles = []" class="pull-left"><span class="glyphicon glyphicon-erase"></span></button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">עיר מגורים</th>
+      <th scope="col">השכלה</th>
+      <th scope="col">חברה</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: lightGray; font-weight: bold; font-size: 20px;" class="col-3" *ngFor="let profile of profiles; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{profile.city}}</td>
+      <td>{{profile.education}}</td>
+      <td>{{profile.company}}</td>
+    </tr>
+  </tbody>
+</table>

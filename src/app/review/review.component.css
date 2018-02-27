@@ -1,0 +1,13 @@
+.table td {
+    border-top: none !important;
+}
+
+.review-thumbnail {
+    display: inline-block;
+    margin-right: 100px;
+    border: 1px solid;
+}
+
+.expand-thumbnail {
+    width: 300px;
+}

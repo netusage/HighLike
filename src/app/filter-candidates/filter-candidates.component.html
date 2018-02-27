@@ -4,5 +4,9 @@
             <app-search (personQueryEmiter)="onQueryChange($event)"></app-search>
         </h1>
     </ul>
+    <div [ngStyle]="{ 'opacity': (loadDataService.peopleInProgress$ | async) ? '1' : '0' }" class="progress">
+        <div *ngIf="loadDataService.peopleInProgress$ | async" class="progress-bar progress-bar-success progress-bar-striped active"
+            role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    </div>
     <app-results [persons]="loadDataService.people$ | async "></app-results>
 </div>

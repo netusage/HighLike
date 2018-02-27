@@ -1,0 +1,41 @@
+<div class="container" dir="rtl">
+  <form class="form-horizontal" #search="ngForm" (ngSubmit)="generateProfile(search)" style="direction:rtl">
+    <div class="row">
+      <label for="city">עיר מגורים (%)</label>
+      <input type="number" min="10" max="100" class="form-control form-control-sm" [(ngModel)]="profileQuery.city" name="city" id="city" style="direction:rtl">
+    </div>
+    <div class="row">
+      <label for="education">השכלה (%)</label>
+      <div>
+        <input type="number" min="10" max="100" class="form-control form-control-sm" [(ngModel)]="profileQuery.education" name="education" id="education">
+      </div>
+    </div>
+    <div class="row">
+      <label for="company">חברה (%)</label>
+      <div>
+        <input type="number" min="10" max="100" class="form-control form-control-sm" [(ngModel)]="profileQuery.company" name="company" id="company">
+      </div>
+    </div>
+
+    <!-- <div class="form-group row">
+          <label class="col-sm-2" for="city">הזן עיר מגורים:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="profileQuery.city" name="city" id="city" style="direction:rtl">
+          </div>
+      </div>
+      
+      <div class="form-group row">
+          <label class="col-sm-2" for="education">הזן השכלה:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="profileQuery.education" name="education" id="education">
+          </div>
+      </div> -->
+
+    <!-- Buttons Block -->
+    <div class="form-group">
+      <!-- <button type="reset" class="btn btn-default">בטל</button> -->
+      <button type="submit" class="btn btn-primary">הפק פרופיל</button>
+    </div>
+    <!-- <button (click)="FindPersonsForCity()" class="button">חפש</button> -->
+  </form>
+</div>

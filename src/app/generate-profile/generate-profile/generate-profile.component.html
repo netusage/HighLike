@@ -1,0 +1,12 @@
+<div style="margin: 20px;">
+  <ul>
+    <h1>
+      <app-gp-search (profileQueryChanged)="onQueryChange($event)"></app-gp-search>
+    </h1>
+  </ul>
+  <div [ngStyle]="{ 'opacity': (loadDataService.profileInProgress$ | async) ? '1' : '0' }" class="progress">
+    <div *ngIf="loadDataService.profileInProgress$ | async" class="progress-bar progress-bar-success progress-bar-striped active"
+      role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+  </div>
+  <app-gp-results [profiles]="loadDataService.profile$ | async"></app-gp-results>
+</div>
