@@ -1,17 +1,17 @@
 <div class="container" dir="rtl">
   <form class="form-horizontal" #search="ngForm" (ngSubmit)="generateProfile(search)" style="direction:rtl">
     <div class="row">
-      <label for="city">עיר מגורים:</label>
+      <label for="city">עיר מגורים (%)</label>
       <input type="number" min="10" max="100" class="form-control form-control-sm" [(ngModel)]="profileQuery.city" name="city" id="city" style="direction:rtl">
     </div>
     <div class="row">
-      <label for="education">השכלה:</label>
+      <label for="education">השכלה (%)</label>
       <div>
         <input type="number" min="10" max="100" class="form-control form-control-sm" [(ngModel)]="profileQuery.education" name="education" id="education">
       </div>
     </div>
     <div class="row">
-      <label for="company">חברה:</label>
+      <label for="company">חברה (%)</label>
       <div>
         <input type="number" min="10" max="100" class="form-control form-control-sm" [(ngModel)]="profileQuery.company" name="company" id="company">
       </div>
