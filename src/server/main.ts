@@ -181,7 +181,7 @@ async function generateProfile() {
 
     const db = client.db("Highlike");
 
-    const contacts = db.collection("people");
+    const contacts = db.collection("employees");
 
     const docs = await contacts.find({}).toArrayAsync();
 
