@@ -166,9 +166,6 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
                 }
                 fieldCounter += 2;
             }
-            // console.log(el.education.toLowerCase(), matchesCounter, fieldCounter, 
-            //     el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()),
-            //     el.education.toLowerCase(), searchCriteria.education.toLowerCase()) ;
         }
 
 
@@ -182,14 +179,14 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
                 }
                 fieldCounter += 2;
             }
-            if (fieldCounter > 0) {
-                el.matchRatio = matchesCounter * 100 / fieldCounter;
-            }
-            else {
-                el.matchRatio = 0;
-            }
         }
 
+        if (fieldCounter > 0) {
+            el.matchRatio = matchesCounter * 100 / fieldCounter;
+        }
+        else {
+            el.matchRatio = 0;
+        }
     }
 }
 
