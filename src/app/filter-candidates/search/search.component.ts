@@ -28,7 +28,16 @@ export class SearchComponent implements OnInit {
     this.personQuery = value;
     //console.log(this.personQuery);
     //console.log("valid: " + valid);
-
-    this.personQueryEmiter.emit(this.personQuery);
+    if (
+      this.personQuery.city == "" &&
+      //this.personQuery.experience_years_from == 0 &&
+      //this.personQuery.experience_years_to == 100 &&
+      this.personQuery.education == "" &&
+      this.personQuery.company == ""){
+        alert("יש להזין לפחות אחד המאפיינים");
+      }
+      else {
+        this.personQueryEmiter.emit(this.personQuery);
+      }
   }
 }
