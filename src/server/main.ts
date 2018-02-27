@@ -145,21 +145,21 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         let matchesCounter = 0;
         let fieldCounter = 0;
         if (searchCriteria.city) {
-            if (el.city.toLowerCase() == searchCriteria.city.toLocaleLowerCase() ) {
+            if (el.city.toLowerCase() == searchCriteria.city.toLowerCase() ) {
                 matchesCounter++;
             }
             fieldCounter++;
         }
     
         if (searchCriteria.education) {
-            if  (el.education.toLocaleLowerCase() == searchCriteria.education.toLocaleLowerCase()) {
+            if  (el.education.toLowerCase() == searchCriteria.education.toLowerCase()) {
                 matchesCounter++;
             }
             fieldCounter++;
         }
     
         if (searchCriteria.company) {
-            if(el.company.toLocaleLowerCase() == searchCriteria.company.toLowerCase()) {
+            if(el.company.toLowerCase() == searchCriteria.company.toLowerCase()) {
                 matchesCounter++;
             }
             fieldCounter++;
