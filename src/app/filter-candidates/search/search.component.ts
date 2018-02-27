@@ -28,6 +28,10 @@ export class SearchComponent implements OnInit {
     this.personQuery = value;
     //console.log(this.personQuery);
     //console.log("valid: " + valid);
+    if(!this.personQuery.city && !this.personQuery.company && !this.personQuery.education){
+      alert("יש להזין לפחות שדה חיפוש אחד");
+      return;
+    }
 
     this.personQueryEmiter.emit(this.personQuery);
   }
