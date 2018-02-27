@@ -49,26 +49,21 @@ export class SearchComponent implements OnInit {
     this.personQuery = value;
     //console.log(this.personQuery);
     //console.log("valid: " + valid);
-    if (
-      this.personQuery.city == "" &&
-      //this.personQuery.experience_years_from == 0 &&
-      //this.personQuery.experience_years_to == 100 &&
-      this.personQuery.education == "" &&
-      this.personQuery.company == ""){
-        alert("יש להזין לפחות אחד המאפיינים");
-        // this.errormsg = "יש להזין לפחות אחד המאפיינים";
-      }
-      else {
-        localStorage.setItem("city", this.personQuery.city);
-        localStorage.setItem("company", this.personQuery.company);
-        localStorage.setItem("education", this.personQuery.education);
-        if (localStorage.getItem("experience_years_from")){
-          localStorage.setItem("experience_years_from", this.personQuery.experience_years_from.toString());
-        }
-        if (localStorage.getItem("experience_years_to")){
-          localStorage.setItem("experience_years_to", this.personQuery.experience_years_to.toString());
-        }
-        this.personQueryEmiter.emit(this.personQuery);
-      }
+    if(!this.personQuery.city && !this.personQuery.company && !this.personQuery.education){
+      alert("יש להזין לפחות שדה חיפוש אחד");
+      return;
+    }
+        
+    localStorage.setItem("city", this.personQuery.city);
+    localStorage.setItem("company", this.personQuery.company);
+    localStorage.setItem("education", this.personQuery.education);
+    if (localStorage.getItem("experience_years_from")){
+      localStorage.setItem("experience_years_from", this.personQuery.experience_years_from.toString());
+    }
+    if (localStorage.getItem("experience_years_to")){
+      localStorage.setItem("experience_years_to", this.personQuery.experience_years_to.toString());
+    }
+
+    this.personQueryEmiter.emit(this.personQuery);
   }
 }

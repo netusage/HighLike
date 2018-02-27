@@ -126,12 +126,18 @@ async function GetPersons(searchCriteria) {
     // for (const doc of docs) {
     //     console.log(doc);
     // }
-
-    console.log("Closing");
+    //onsole.log(objQuery);
+    //console.log(docs);
+    //console.log("Closing");
     client.close();
 
     CalcRatio(docs, searchCriteria);
-    return docs;
+    const docs1 = docs.sort((obj1:PersonModel, obj2:PersonModel) => {        
+        // Descending: first age less than the previous
+        return obj2.matchRatio - obj1.matchRatio;        
+    });;
+    
+    return docs1;    
 }
 
 function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
@@ -139,21 +145,21 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         let matchesCounter = 0;
         let fieldCounter = 0;
         if (searchCriteria.city) {
-            if (el.city == searchCriteria.city ) {
+            if (el.city.toLowerCase() == searchCriteria.city.toLocaleLowerCase() ) {
                 matchesCounter++;
             }
             fieldCounter++;
         }
     
         if (searchCriteria.education) {
-            if  (el.education == searchCriteria.education) {
+            if  (el.education.toLocaleLowerCase() == searchCriteria.education.toLocaleLowerCase()) {
                 matchesCounter++;
             }
             fieldCounter++;
         }
     
         if (searchCriteria.company) {
-            if(el.company == searchCriteria.company) {
+            if(el.company.toLocaleLowerCase() == searchCriteria.company.toLowerCase()) {
                 matchesCounter++;
             }
             fieldCounter++;
@@ -175,7 +181,7 @@ async function generateProfile() {
 
     const db = client.db("Highlike");
 
-    const contacts = db.collection("people");
+    const contacts = db.collection("employees");
 
     const docs = await contacts.find({}).toArrayAsync();
 
@@ -183,9 +189,13 @@ async function generateProfile() {
     //     console.log(doc);
     // }
 
+    
     console.log("Closing");
     client.close();
+    console.log(docs);
+        
     return docs;
+    
 }
 
 function handleProfile(persons: Array<PersonModel>, searchCriteria: ProfileQuery, res: any) {
@@ -248,15 +258,18 @@ function buildQuery(searchCriteria){
     Object.setPrototypeOf(searchCriteria, null);
     
     if (searchCriteria.city) {
-        searchCriteriaArray.push({city: searchCriteria.city})
+        const city = eval('/'+searchCriteria.city+'/i');
+        searchCriteriaArray.push({city: city})
     }
 
     if (searchCriteria.education) {
-        searchCriteriaArray.push({education: searchCriteria.education})
+        const education = eval('/'+searchCriteria.education+'/i');
+        searchCriteriaArray.push({education: education})
     }
 
     if (searchCriteria.company) {
-        searchCriteriaArray.push({company: searchCriteria.company})
+        const company = eval('/'+searchCriteria.company+'/i');
+        searchCriteriaArray.push({company: company});
     }
 
     // if (searchCriteria.experience_years_from && Number(searchCriteria.experience_years_from) > 0 ) {
