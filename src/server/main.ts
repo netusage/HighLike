@@ -114,12 +114,12 @@ async function GetPersons(searchCriteria) {
 
     const contacts = db.collection("people");
 
-    
+
     const objQuery = buildQuery(searchCriteria);
     // const docs = await contacts.find({$or:[{city:"תל אביב"}, {education:"תוכנה"}]}).toArrayAsync();
     let docs: Array<PersonModel> = [];
-    if (objQuery){
-        docs = await contacts.find(objQuery).toArrayAsync();        
+    if (objQuery) {
+        docs = await contacts.find(objQuery).toArrayAsync();
     }
 
 
@@ -132,12 +132,12 @@ async function GetPersons(searchCriteria) {
     client.close();
 
     CalcRatio(docs, searchCriteria);
-    const docs1 = docs.sort((obj1:PersonModel, obj2:PersonModel) => {        
+    const docs1 = docs.sort((obj1: PersonModel, obj2: PersonModel) => {
         // Descending: first age less than the previous
-        return obj2.matchRatio - obj1.matchRatio;        
+        return obj2.matchRatio - obj1.matchRatio;
     });;
-    
-    return docs1;    
+
+    return docs1;
 }
 
 function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
@@ -145,34 +145,55 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         let matchesCounter = 0;
         let fieldCounter = 0;
         if (searchCriteria.city) {
-            if (el.city.toLowerCase() == searchCriteria.city.toLocaleLowerCase() ) {
-                matchesCounter++;
+            if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
+                if (el.city.toLowerCase() == searchCriteria.city.toLocaleLowerCase()) {
+                    matchesCounter += 2;
+                }
+                else {
+                    matchesCounter++;
+                }
+                fieldCounter += 2;
             }
-            fieldCounter++;
         }
-    
+
         if (searchCriteria.education) {
-            if  (el.education.toLocaleLowerCase() == searchCriteria.education.toLocaleLowerCase()) {
-                matchesCounter++;
+            if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
+                if (el.education.toLowerCase() == searchCriteria.education.toLowerCase()) {
+                    matchesCounter += 2;
+                }
+                else {
+                    matchesCounter++;
+                }
+                fieldCounter += 2;
             }
-            fieldCounter++;
+            // console.log(el.education.toLowerCase(), matchesCounter, fieldCounter, 
+            //     el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()),
+            //     el.education.toLowerCase(), searchCriteria.education.toLowerCase()) ;
         }
-    
+
+
         if (searchCriteria.company) {
-            if(el.company.toLocaleLowerCase() == searchCriteria.company.toLowerCase()) {
-                matchesCounter++;
+            if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
+                if (el.company.toLowerCase() == searchCriteria.company.toLowerCase()) {
+                    matchesCounter += 2;
+                }
+                else {
+                    matchesCounter++;
+                }
+                fieldCounter += 2;
             }
-            fieldCounter++;
-        }
-        if (fieldCounter > 0) {
-            el.matchRatio = matchesCounter * 100 / fieldCounter;
-        }
-        else {
-            el.matchRatio = 0;
+            if (fieldCounter > 0) {
+                el.matchRatio = matchesCounter * 100 / fieldCounter;
+            }
+            else {
+                el.matchRatio = 0;
+            }
         }
 
     }
 }
+
+
 async function generateProfile() {
 
     console.log("Connecting");
@@ -189,13 +210,13 @@ async function generateProfile() {
     //     console.log(doc);
     // }
 
-    
+
     console.log("Closing");
     client.close();
     console.log(docs);
-        
+
     return docs;
-    
+
 }
 
 function handleProfile(persons: Array<PersonModel>, searchCriteria: ProfileQuery, res: any) {
@@ -230,20 +251,19 @@ function handleProfile(persons: Array<PersonModel>, searchCriteria: ProfileQuery
     res.json(emptyProfile ? [] : [profile]);
 }
 
+
 function findMostFrequent(values: Array<string>) {
-    if(values.length == 0)
+    if (values.length == 0)
         return null;
     var modeMap = {};
     var maxEl = values[0], maxCount = 1;
-    for(var i = 0; i < values.length; i++)
-    {
+    for (var i = 0; i < values.length; i++) {
         var el = values[i];
-        if(modeMap[el] == null)
+        if (modeMap[el] == null)
             modeMap[el] = 1;
         else
-            modeMap[el]++;  
-        if(modeMap[el] > maxCount)
-        {
+            modeMap[el]++;
+        if (modeMap[el] > maxCount) {
             maxEl = el;
             maxCount = modeMap[el];
         }
@@ -251,25 +271,25 @@ function findMostFrequent(values: Array<string>) {
     return { value: maxEl, count: maxCount };
 }
 
-function buildQuery(searchCriteria){
+function buildQuery(searchCriteria) {
 
-    
+
     const searchCriteriaArray: Array<any> = [];
     Object.setPrototypeOf(searchCriteria, null);
-    
+
     if (searchCriteria.city) {
-        const city = eval('/'+searchCriteria.city+'/i');
-        searchCriteriaArray.push({city: city})
+        const city = eval('/' + searchCriteria.city + '/i');
+        searchCriteriaArray.push({ city: city })
     }
 
     if (searchCriteria.education) {
-        const education = eval('/'+searchCriteria.education+'/i');
-        searchCriteriaArray.push({education: education})
+        const education = eval('/' + searchCriteria.education + '/i');
+        searchCriteriaArray.push({ education: education })
     }
 
     if (searchCriteria.company) {
-        const company = eval('/'+searchCriteria.company+'/i');
-        searchCriteriaArray.push({company: company});
+        const company = eval('/' + searchCriteria.company + '/i');
+        searchCriteriaArray.push({ company: company });
     }
 
     // searchCriteria.experience_years_from = 3;
@@ -283,7 +303,7 @@ function buildQuery(searchCriteria){
     // }
     if (searchCriteriaArray) {
 
-        return {$or: searchCriteriaArray };
+        return { $or: searchCriteriaArray };
     }
 
     return {};
