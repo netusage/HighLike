@@ -46,12 +46,7 @@ export class LoadDataService {
     }*/
 
     public postJSON(candidateParams: PersonQuery) {
-<<<<<<< HEAD
       this.http.post("http://localhost:3000/api/person/Matches", {
-=======
-      this.peopleInProgressSubj$.next(true);
-      this.http.post("http://localhost:3000/api/person/getMatches", {
->>>>>>> 9ec496992d1eb40ba86a09ff8e37bf3c2e45f6e1
         candidateParams
       }).subscribe((data: Array<PersonModel>) => {
         this.peopleSubj$.next(data);
