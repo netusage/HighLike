@@ -145,15 +145,15 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         let matchesCounter = 0;
         let fieldCounter = 0;
         if (searchCriteria.city) {
-            if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
+            if (el.city.toLowerCase().indexOf(searchCriteria.city.toLowerCase()) != -1) {
                 if (el.city.toLowerCase() == searchCriteria.city.toLowerCase()) {
                     matchesCounter += 2;
                 }
                 else {
                     matchesCounter++;
                 }
-                fieldCounter += 2;
             }
+            fieldCounter += 2;
         }
 
         if (searchCriteria.education) {
@@ -164,21 +164,21 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
                 else {
                     matchesCounter++;
                 }
-                fieldCounter += 2;
             }
+            fieldCounter += 2;
         }
 
 
         if (searchCriteria.company) {
-            if (el.education.toLowerCase().indexOf(searchCriteria.education.toLowerCase()) != -1) {
+            if (el.company.toLowerCase().indexOf(searchCriteria.company.toLowerCase()) != -1) {
                 if (el.company.toLowerCase() == searchCriteria.company.toLowerCase()) {
                     matchesCounter += 2;
                 }
                 else {
                     matchesCounter++;
                 }
-                fieldCounter += 2;
             }
+            fieldCounter += 2;
         }
 
         if (fieldCounter > 0) {
