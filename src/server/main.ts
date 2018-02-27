@@ -126,7 +126,8 @@ async function GetPersons(searchCriteria) {
     // for (const doc of docs) {
     //     console.log(doc);
     // }
-
+    console.log(objQuery);
+    console.log(docs);
     console.log("Closing");
     client.close();
 
@@ -139,21 +140,21 @@ function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
         let matchesCounter = 0;
         let fieldCounter = 0;
         if (searchCriteria.city) {
-            if (el.city == searchCriteria.city ) {
+            if (el.city.toLowerCase() == searchCriteria.city.toLocaleLowerCase() ) {
                 matchesCounter++;
             }
             fieldCounter++;
         }
     
         if (searchCriteria.education) {
-            if  (el.education == searchCriteria.education) {
+            if  (el.education.toLocaleLowerCase() == searchCriteria.education.toLocaleLowerCase()) {
                 matchesCounter++;
             }
             fieldCounter++;
         }
     
         if (searchCriteria.company) {
-            if(el.company == searchCriteria.company) {
+            if(el.company.toLocaleLowerCase() == searchCriteria.company.toLowerCase()) {
                 matchesCounter++;
             }
             fieldCounter++;
@@ -243,15 +244,19 @@ function buildQuery(searchCriteria){
     Object.setPrototypeOf(searchCriteria, null);
     
     if (searchCriteria.city) {
-        searchCriteriaArray.push({city: searchCriteria.city})
+        const city = eval('/'+searchCriteria.city+'/i');
+        searchCriteriaArray.push({city: city})
     }
 
     if (searchCriteria.education) {
-        searchCriteriaArray.push({education: searchCriteria.education})
+        const education = eval('/'+searchCriteria.education+'/i');
+        searchCriteriaArray.push({education: education})
     }
 
     if (searchCriteria.company) {
-        searchCriteriaArray.push({company: searchCriteria.company})
+        const company = eval('/'+searchCriteria.company+'/i');
+        searchCriteriaArray.push({company: company})
+        console.log(company, searchCriteriaArray);
     }
 
     // if (searchCriteria.experience_years_from && Number(searchCriteria.experience_years_from) > 0 ) {
