@@ -13,16 +13,37 @@ export class SearchComponent implements OnInit {
   
   public city: string;
   private personQuery: PersonQuery;
+  private errormsg: string = '';
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
-      this.personQuery = new PersonQuery(
-         {
-          city: "", experience_years_from: 0, experience_years_to: 100, education: "", company: ""
-         }
-    );
-  }
+    if(!localStorage.key(0))
+    {
+        this.personQuery = new PersonQuery(
+            {
+              city: "", 
+              experience_years_from: 0, 
+              experience_years_to: 100, 
+              education: "", 
+              company: ""
+            }
+        );
+      }
+      else{
+        this.personQuery = new PersonQuery(
+          {
+            city: localStorage.getItem("city"), 
+            experience_years_from: Number(localStorage.getItem("experience_years_from")), 
+            experience_years_to: Number(localStorage.getItem("experience_years_to")), 
+            education: localStorage.getItem("education"), 
+            company: localStorage.getItem("company")
+          }
+      );
+      }
+
+    }
 
   FindPersons({ value, valid}: { value: PersonQuery, valid: boolean }) {
     this.personQuery = value;
@@ -35,8 +56,18 @@ export class SearchComponent implements OnInit {
       this.personQuery.education == "" &&
       this.personQuery.company == ""){
         alert("יש להזין לפחות אחד המאפיינים");
+        // this.errormsg = "יש להזין לפחות אחד המאפיינים";
       }
       else {
+        localStorage.setItem("city", this.personQuery.city);
+        localStorage.setItem("company", this.personQuery.company);
+        localStorage.setItem("education", this.personQuery.education);
+        if (localStorage.getItem("experience_years_from")){
+          localStorage.setItem("experience_years_from", this.personQuery.experience_years_from.toString());
+        }
+        if (localStorage.getItem("experience_years_to")){
+          localStorage.setItem("experience_years_to", this.personQuery.experience_years_to.toString());
+        }
         this.personQueryEmiter.emit(this.personQuery);
       }
   }
