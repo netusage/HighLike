@@ -13,10 +13,14 @@ export class LoadDataService {
 
   private peopleSubj$: BehaviorSubject<Array<PersonModel>>;
   private profileSubj$: BehaviorSubject<Array<ProfileModel>>;
+  private peopleInProgressSubj$: BehaviorSubject<boolean>;
+  private profileInProgressSubj$: BehaviorSubject<boolean>;
 
    constructor(private http: HttpClient) {
      this.peopleSubj$ = new BehaviorSubject<Array<PersonModel>>(undefined);
      this.profileSubj$ = new BehaviorSubject<Array<ProfileModel>>(undefined);
+     this.peopleInProgressSubj$ = new BehaviorSubject<boolean>(false);
+     this.profileInProgressSubj$ = new BehaviorSubject<boolean>(false);
     }
 
     public get people$(): Observable<Array<PersonModel>> {
@@ -27,6 +31,14 @@ export class LoadDataService {
       return this.profileSubj$ as Observable<Array<ProfileModel>>;
     }
 
+    public get peopleInProgress$(): Observable<boolean> {
+      return this.peopleInProgressSubj$ as Observable<boolean>;
+    }
+
+    public get profileInProgress$(): Observable<boolean> {
+      return this.profileInProgressSubj$ as Observable<boolean>;
+    }
+
     /*public getJSON() {
         this.http.get("./assets/peopleMock.json").subscribe((data: Array<PersonModel>) => {
           this.peopleSubj$.next(data);
@@ -34,18 +46,28 @@ export class LoadDataService {
     }*/
 
     public postJSON(candidateParams: PersonQuery) {
+      this.peopleInProgressSubj$.next(true);
       this.http.post("http://localhost:3000/api/person/getMatches", {
         candidateParams
       }).subscribe((data: Array<PersonModel>) => {
         this.peopleSubj$.next(data);
+        this.peopleInProgressSubj$.next(false);
+      }, error => {
+        console.log(error);
+        this.peopleInProgressSubj$.next(false);
       });
     }
 
     public generateProfile(profileQuery: ProfileQuery) {
+      this.profileInProgressSubj$.next(true);
       this.http.post("http://localhost:3000/api/profile/generate", {
         profileQuery
       }).subscribe((data: Array<ProfileModel>) => {
         this.profileSubj$.next(data);
+        this.profileInProgressSubj$.next(false);
+      }, error => {
+        console.log(error);
+        this.profileInProgressSubj$.next(false);
       });
     }
   }

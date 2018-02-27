@@ -1,4 +1,7 @@
 <hr>
-  <div class="col-3" *ngFor="let person of persons">
-        <app-person-card [person]="person"></app-person-card>
-  </div>
+<button (click)="persons = []" class="pull-left">
+  <span class="glyphicon glyphicon-erase"></span>
+</button>
+<div class="col-3" *ngFor="let person of persons">
+  <app-person-card [person]="person"></app-person-card>
+</div>
