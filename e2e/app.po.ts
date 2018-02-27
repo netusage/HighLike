@@ -26,7 +26,7 @@ export class AppPage {
   }
 
   getRowCount() {
-    const rows = element.all(by.css('app-results tr'));
+    const rows = element.all(by.css('app-results app-person-card'));
     return rows.count();
   }
 }

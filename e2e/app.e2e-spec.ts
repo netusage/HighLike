@@ -12,23 +12,12 @@ describe('high-like App', () => {
     expect(page.getNavbarTitle()).toEqual('High Like');
   });
 
-  it('should display all persons when city is empty', () => {
-    page.navigateTo();
-    page.updateCityInput('').then(data1 => {
-      page.submit().then(data2 => {
-        page.getRowCount().then(data3 => {
-          expect(data3 - 1).toBe(6);
-        });
-      });
-    });
-  });
-
   it('should display 1 person when city is holon', () => {
     page.navigateTo();
     page.updateCityInput('חולון').then(data1 => {
       page.submit().then(data2 => {
         page.getRowCount().then(data3 => {
-          expect(data3 - 1).toBe(1);
+          expect(data3).toBe(2);
         });
       });
     });
@@ -42,7 +31,7 @@ describe('high-like App', () => {
           page.updateCityInput('תל אביב').then(data4 => {
             page.submit().then(data5 => {
               page.getRowCount().then(data6 => {
-                expect(data6 - 1).toBe(3);
+                expect(data6).toBe(8);
               });
             });
           });
