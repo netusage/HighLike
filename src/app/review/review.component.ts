@@ -7,15 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
 
-  public fullScreen = false;
+  public expands = [false, false, false, false];
+  public displays = [true, true, true, true];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  screenClick() {
-    this.fullScreen = true;
+  buttonClick(position: number) {
+    const expand = this.expands[position];
+    if (!expand) {
+      this.expands[position] = true;
+      for (let i = 0; i < this.expands.length; i++) {
+        if (i !== position) {
+          this.displays[i] = false;
+        }
+      }
+    } else {
+      this.expands[position] = false;
+      for (let i = 0; i < this.expands.length; i++) {
+        if (i !== position) {
+          this.displays[i] = true;
+        }
+      }
+    }
   }
 
 }
