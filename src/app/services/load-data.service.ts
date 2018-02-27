@@ -26,7 +26,7 @@ export class LoadDataService {
     }*/
 
     public postJSON(candidateParams: PersonQuery) {
-      this.http.post("http://localhost:3000/api/person/getMatches", {
+      this.http.post("http://localhost:3000/api/person/Matches", {
         candidateParams
       }).subscribe((data: Array<PersonModel>) => {
         this.peopleSubj$.next(data);
