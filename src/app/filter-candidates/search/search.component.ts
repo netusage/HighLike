@@ -26,8 +26,6 @@ export class SearchComponent implements OnInit {
 
   FindPersons({ value, valid}: { value: PersonQuery, valid: boolean }) {
     this.personQuery = value;
-    //console.log(this.personQuery);
-    //console.log("valid: " + valid);
     if(!this.personQuery.city && !this.personQuery.company && !this.personQuery.education){
       alert("יש להזין לפחות שדה חיפוש אחד");
       return;
