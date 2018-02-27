@@ -35,11 +35,7 @@ const bodyParser = require("body-parser"); // Body parser for fetch posted data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // Body parser use JSON data
 
-<<<<<<< HEAD
 app.post('/api/person/Matches',function(req,res){
-=======
-app.post('/api/person/getMatches', function (req, res) {
->>>>>>> 9ec496992d1eb40ba86a09ff8e37bf3c2e45f6e1
     const searchCriteria: PersonQuery = req.body.candidateParams;
 
     //const fs = require('fs');
