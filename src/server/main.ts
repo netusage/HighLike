@@ -126,13 +126,18 @@ async function GetPersons(searchCriteria) {
     // for (const doc of docs) {
     //     console.log(doc);
     // }
-    console.log(objQuery);
-    console.log(docs);
-    console.log("Closing");
+    //onsole.log(objQuery);
+    //console.log(docs);
+    //console.log("Closing");
     client.close();
 
     CalcRatio(docs, searchCriteria);
-    return docs;
+    const docs1 = docs.sort((obj1:PersonModel, obj2:PersonModel) => {        
+        // Descending: first age less than the previous
+        return obj2.matchRatio - obj1.matchRatio;        
+    });;
+    
+    return docs1;    
 }
 
 function CalcRatio(docs: Array<PersonModel>, searchCriteria: PersonQuery) {
@@ -184,9 +189,13 @@ async function generateProfile() {
     //     console.log(doc);
     // }
 
+    
     console.log("Closing");
     client.close();
+    console.log(docs);
+        
     return docs;
+    
 }
 
 function handleProfile(persons: Array<PersonModel>, searchCriteria: ProfileQuery, res: any) {
@@ -260,8 +269,7 @@ function buildQuery(searchCriteria){
 
     if (searchCriteria.company) {
         const company = eval('/'+searchCriteria.company+'/i');
-        searchCriteriaArray.push({company: company})
-        console.log(company, searchCriteriaArray);
+        searchCriteriaArray.push({company: company});
     }
 
     // if (searchCriteria.experience_years_from && Number(searchCriteria.experience_years_from) > 0 ) {
