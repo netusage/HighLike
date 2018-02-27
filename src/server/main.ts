@@ -272,9 +272,12 @@ function buildQuery(searchCriteria){
         searchCriteriaArray.push({company: company});
     }
 
+    // searchCriteria.experience_years_from = 3;
     // if (searchCriteria.experience_years_from && Number(searchCriteria.experience_years_from) > 0 ) {
-    //     searchCriteriaArray.push({experience_years: {$gte :Number(searchCriteria.experience_years_from)}})
+    //     const gte = eval('$gte');
+    //     searchCriteriaArray.push({experience_years: {gte : searchCriteria.experience_years_from}})
     // }
+    // console.log(searchCriteriaArray);
     // if (searchCriteria.experience_years_to && Number(searchCriteria.experience_years_to) > 0 && Number(searchCriteria.experience_years_to) < 100) {
     //     searchCriteriaArray.push({experience_years: {$lte:Number(searchCriteria.experience_years_to)}})
     // }
