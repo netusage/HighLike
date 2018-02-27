@@ -13,7 +13,9 @@ async function dev(){
   try {
     await runMongo();
 
-    await fillMongo();
+    await fillMongoWithCandidates();
+
+    await fillMongoWithEmployees();
 
     await spawn("src\\server\\node_modules\\.bin\\tsc", ["-p", "src\\server\\tsconfig.json"], {
       validateExitCode: true,
@@ -46,8 +48,8 @@ async function runMongo(){
   await spawn(mongoExe, ["--dbpath", mongoData]);
 }
 
-async function fillMongo() {
-  const initialJsonFilePath = path.resolve(__dirname, "../../db/initial.json");
+async function fillMongoWithCandidates() {
+  const initialJsonFilePath = path.resolve(__dirname, "../../db/initialCandidates.json");
   const initialContacts = JSON.parse(await readFile(initialJsonFilePath, "utf8"));
 
   console.log("Connecting to mongo");
@@ -56,14 +58,37 @@ async function fillMongo() {
   const db = client.db("Highlike");
   const coll = db.collection("people");
 
-  console.log("Checking data is present inside db");
+  console.log("Checking if candidates data present inside db");
   const contacts = await coll.find({}).toArrayAsync();
   if (contacts.length == 0) {
-    console.log("Filling initial data from " + initialJsonFilePath);
+    console.log("Filling candidates initial data from " + initialJsonFilePath);
     await coll.insertManyAsync(initialContacts);
   }
   else {
-    console.log("Data is already present inside database")
+    console.log("Candidates data already present inside db");
+  }
+
+  client.close();
+}
+
+async function fillMongoWithEmployees() {
+  const initialJsonFilePath = path.resolve(__dirname, "../../db/initialEmployees.json");
+  const initialContacts = JSON.parse(await readFile(initialJsonFilePath, "utf8"));
+
+  console.log("Connecting to mongo");
+  const client = await connect("mongodb://localhost:27017");
+
+  const db = client.db("Highlike");
+  const coll = db.collection("employees");
+
+  console.log("Checking if employees data present inside db");
+  const contacts = await coll.find({}).toArrayAsync();
+  if (contacts.length == 0) {
+    console.log("Filling employees initial data from " + initialJsonFilePath);
+    await coll.insertManyAsync(initialContacts);
+  }
+  else {
+    console.log("Employees data already present inside db");
   }
 
   client.close();
